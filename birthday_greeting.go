@@ -18,12 +18,13 @@ func (friend *Friend) isBirthday(date time.Time) bool {
 
 func greeting(friends []Friend, date time.Time) (string, error) {
 
-	for _, f := range friends {
-		if f.isBirthday(date) {
-			return fmt.Sprintf("Subject: Happy birthday!\nHappy birthday, dear %s!", f.name), nil
+	for _, friend := range friends {
+		if friend.isBirthday(date) {
+			return fmt.Sprintf("Subject: Happy birthday!\nHappy birthday, dear %s!", friend.name), nil
 		}
 	}
-	return " ", nil // TODO erros ?
+	// TODO no birthday test
+	return "", nil
 }
 
 func main() {
