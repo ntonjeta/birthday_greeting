@@ -11,19 +11,19 @@ type Friend struct {
 	birthday time.Time
 }
 
+func (friend *Friend) isBirthday(date time.Time) bool {
+	return friend.birthday.Day() == date.Day() &&
+		friend.birthday.Month() == date.Month()
+}
+
 func greeting(friends []Friend, date time.Time) (string, error) {
 
 	for _, f := range friends {
-		if isBirthday(f, date) {
+		if f.isBirthday(date) {
 			return fmt.Sprintf("Subject: Happy birthday!\nHappy birthday, dear %s!", f.name), nil
 		}
 	}
 	return " ", nil // TODO erros ?
-}
-
-func isBirthday(friend Friend, date time.Time) bool {
-	return friend.birthday.Day() == date.Day() &&
-		friend.birthday.Month() == date.Month()
 }
 
 func main() {
