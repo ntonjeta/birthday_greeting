@@ -2,7 +2,6 @@ package main
 
 import (
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -13,10 +12,13 @@ var friends = []Friend{
 }
 
 func TestAcceptance(t *testing.T) {
-	date := time.Now()
+	var mail, e = greeting(friends)
 
-	var mail, e = greeting(friends, date)
+	assert.Nil(t, e)
 
-	assert.NotNil(t, e)
-	assert.Empty(t, mail)
+	assert.Equal(
+		t,
+		mail,
+		"Subject: Happy birthday!\nHappy birthday, dear Mary!",
+		"mails shoulld be equals")
 }

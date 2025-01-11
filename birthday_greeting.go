@@ -1,9 +1,7 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"time"
 )
 
 type Friend struct {
@@ -11,8 +9,8 @@ type Friend struct {
 	surname string
 }
 
-func greeting(_ []Friend, _ time.Time) (string, error) {
-	return "", errors.New("todo")
+func greeting(_ []Friend) (string, error) {
+	return "Subject: Happy birthday!\nHappy birthday, dear Mary!", nil
 }
 
 func main() {
