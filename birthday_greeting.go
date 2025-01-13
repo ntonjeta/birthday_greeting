@@ -12,6 +12,7 @@ func greeting(
 
 	// TODO test error repository
 	var friends, _ = friendRepository.get()
+
 	for _, friend := range friends {
 		if friend.isBirthday(date) {
 			greetingSender.send(friend.name)
