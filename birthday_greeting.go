@@ -1,13 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"time"
 )
-
-type GreetingSender interface {
-	send(name string) error
-}
 
 func greeting(
 	friendRepository FriendRepository,
@@ -20,7 +15,6 @@ func greeting(
 	for _, friend := range friends {
 		if friend.isBirthday(date) {
 			greetingSender.send(friend.name)
-			// return fmt.Sprintf("Subject: Happy birthday!\nHappy birthday, dear %s!", friend.name), nil
 		}
 	}
 	// TODO no birthday test
@@ -28,5 +22,9 @@ func greeting(
 }
 
 func main() {
-	fmt.Printf("Birthday greeting! \n")
+	var date = time.Date(2024, 11, 21, 0, 0, 0, 0, time.Local)
+	var friends ConsoleFriendRepository
+	var sender ConsoleGreetingSender
+
+	greeting(&friends, &sender, date)
 }
