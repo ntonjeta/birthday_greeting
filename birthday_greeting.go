@@ -5,17 +5,13 @@ import (
 	"time"
 )
 
-type FriendRepository interface {
-	get() ([]Friend, error)
-}
-
 func greeting(
-	friendRepo FriendRepository,
+	friendRepository FriendRepository,
 	date time.Time,
 ) (string, error) {
 
 	// TODO test error repository
-	var friends, _ = friendRepo.get()
+	var friends, _ = friendRepository.get()
 	for _, friend := range friends {
 		if friend.isBirthday(date) {
 			return fmt.Sprintf("Subject: Happy birthday!\nHappy birthday, dear %s!", friend.name), nil
