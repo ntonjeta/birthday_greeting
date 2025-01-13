@@ -1,14 +1,14 @@
-package main
+package greeting
 
 import "time"
 
 type Friend struct {
-	name     string
-	surname  string
-	birthday time.Time
+	Name     string
+	Surname  string
+	Birthday time.Time
 }
 
-func (friend *Friend) isBirthday(date time.Time) bool {
-	return friend.birthday.Day() == date.Day() &&
-		friend.birthday.Month() == date.Month()
+func (friend *Friend) IsBirthday(date time.Time) bool {
+	return friend.Birthday.Day() == date.Day() &&
+		friend.Birthday.Month() == date.Month()
 }

@@ -1,4 +1,4 @@
-package main
+package greeting
 
 import (
 	"time"
@@ -11,21 +11,13 @@ func greeting(
 ) error {
 
 	// TODO test error repository
-	var friends, _ = friendRepository.get()
+	var friends, _ = friendRepository.Get()
 
 	for _, friend := range friends {
-		if friend.isBirthday(date) {
-			greetingSender.send(friend.name)
+		if friend.IsBirthday(date) {
+			greetingSender.Send(friend.Name)
 		}
 	}
 	// TODO no birthday test
 	return nil
-}
-
-func main() {
-	var date = time.Date(2024, 11, 21, 0, 0, 0, 0, time.Local)
-	var friends ConsoleFriendRepository
-	var sender ConsoleGreetingSender
-
-	greeting(&friends, &sender, date)
 }

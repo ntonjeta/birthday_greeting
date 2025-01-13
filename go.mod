@@ -1,4 +1,4 @@
-module birthday_greeting
+module github.com/ntonjeta/greeting
 
 go 1.23.4
 
