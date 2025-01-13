@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
 
 var friends = []Friend{
@@ -12,10 +13,21 @@ var friends = []Friend{
 	{name: "John", surname: "Doe", birthday: time.Date(1974, 10, 1, 0, 0, 0, 0, time.Local)},
 }
 
+type MockFriendRepository struct {
+	mock.Mock
+}
+
+func (m *MockFriendRepository) get() ([]Friend, error) {
+	return friends, nil
+}
+
 func TestAcceptance_MaryBirthday(t *testing.T) {
 	var date = time.Date(2024, 11, 21, 0, 0, 0, 0, time.Local)
 
-	var mail, e = greeting(friends, date)
+	testRepository := new(MockFriendRepository)
+	testRepository.On("get").Return(friends, nil)
+
+	var mail, e = greeting(testRepository, date)
 
 	assert.Nil(t, e)
 
@@ -29,7 +41,10 @@ func TestAcceptance_MaryBirthday(t *testing.T) {
 func TestAcceptance_JohnBirthday(t *testing.T) {
 	var date = time.Date(2024, 10, 1, 0, 0, 0, 0, time.Local)
 
-	var mail, e = greeting(friends, date)
+	testRepository := new(MockFriendRepository)
+	testRepository.On("get").Return(friends, nil)
+
+	var mail, e = greeting(testRepository, date)
 
 	assert.Nil(t, e)
 
