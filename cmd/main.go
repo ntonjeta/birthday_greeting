@@ -10,7 +10,7 @@ import (
 
 func main() {
 	var date = time.Date(2023, 11, 21, 0, 0, 0, 0, time.Local)
-	var friends repository.ConsoleFriendRepository
+	var friends repository.FileFriendRepository
 	var sender sender.ConsoleGreetingSender
 
 	greeting.Greeting(&friends, &sender, date)
