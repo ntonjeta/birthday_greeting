@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"strconv"
@@ -20,7 +19,7 @@ func (f *FileFriendRepository) Get() ([]greeting.Friend, error) {
 	content, err := os.ReadFile("friends.txt")
 	if err != nil {
 		fmt.Printf("error %s", err.Error())
-		errors.New("error reading friends file!")
+		return []greeting.Friend{}, err
 	}
 
 	for _, l := range strings.Split(strings.TrimSpace(string(content)), "\n")[1:] {
