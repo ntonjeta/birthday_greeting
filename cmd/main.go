@@ -2,12 +2,16 @@ package main
 
 import (
 	"time"
+
+	"github.com/ntonjeta/greeting"
+	"github.com/ntonjeta/greeting/adapter/repository"
+	"github.com/ntonjeta/greeting/adapter/sender"
 )
 
 func main() {
 	var date = time.Date(2023, 11, 21, 0, 0, 0, 0, time.Local)
-	var friends ConsoleFriendRepository
-	var sender ConsoleGreetingSender
+	var friends repository.ConsoleFriendRepository
+	var sender sender.ConsoleGreetingSender
 
-	greeting(&friends, &sender, date)
+	greeting.Greeting(&friends, &sender, date)
 }
