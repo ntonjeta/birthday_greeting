@@ -1,6 +1,7 @@
 package greeting
 
 import (
+	"log"
 	"time"
 )
 
@@ -10,8 +11,11 @@ func Greeting(
 	date time.Time,
 ) error {
 
-	// TODO test error repository
-	var friends, _ = friendRepository.Get()
+	var friends, err = friendRepository.Get()
+	if err != nil {
+		log.Println(err)
+		return err
+	}
 
 	for _, friend := range friends {
 		if friend.IsBirthday(date) {
