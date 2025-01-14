@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-func greeting(
+func Greeting(
 	friendRepository FriendRepository,
 	greetingSender GreetingSender,
 	date time.Time,
