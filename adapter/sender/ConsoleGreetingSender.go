@@ -1,6 +1,6 @@
 package sender
 
-import fmt 
+import "fmt"
 
 type ConsoleGreetingSender struct {
 }
