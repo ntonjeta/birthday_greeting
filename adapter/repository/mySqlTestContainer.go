@@ -13,7 +13,6 @@ import (
 func startMySql(ctx context.Context) (mysql.MySQLContainer, error) {
 	container, err := mysql.Run(ctx,
 		"mysql:8.0.36",
-		// mysql.WithConfigFile(filepath.Join("testdata", "my_8.cnf")),
 		mysql.WithDatabase("test"),
 		mysql.WithUsername("root"),
 		mysql.WithPassword("password"),
