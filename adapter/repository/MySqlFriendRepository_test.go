@@ -8,18 +8,16 @@ import (
 	"testing"
 
 	_ "github.com/go-sql-driver/mysql"
+	mySqlTestContainer "github.com/testcontainers/testcontainers-go/modules/mysql"
 )
 
-var db *sql.DB
-
-func TestWithMySql(t *testing.T) {
+func arrange() (*sql.DB, mySqlTestContainer.MySQLContainer) {
 	ctx := context.Background()
 
 	container, err := startMySql(ctx)
 	if err != nil {
 		fmt.Printf("error create mysql container: %s", err)
 	}
-	defer stopMySql(container)
 
 	cs, err := container.ConnectionString(ctx)
 	if err != nil {
@@ -30,6 +28,17 @@ func TestWithMySql(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	return db, container
+}
+
+func dispose(container mySqlTestContainer.MySQLContainer) {
+	stopMySql(container)
+}
+
+func TestWithMySql(t *testing.T) {
+	var db, container = arrange()
+	defer dispose(container)
 
 	pingErr := db.Ping()
 	if pingErr != nil {
