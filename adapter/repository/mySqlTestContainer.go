@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"log"
+	"os"
 	"path/filepath"
 
 	"github.com/testcontainers/testcontainers-go"
@@ -20,7 +21,7 @@ func startMySql(ctx context.Context) (mysql.MySQLContainer, error) {
 	)
 	if err != nil {
 		log.Printf("failed to start container: %s", err)
-		return mysql.MySQLContainer{}, err
+		os.Exit(1)
 	}
 
 	return *container, nil
